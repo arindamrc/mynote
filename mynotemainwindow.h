@@ -27,6 +27,7 @@ private:
     QMenu *helpMenu;
 
     //Actions
+
 };
 
 #endif // MYNOTEMAINWINDOW_H
