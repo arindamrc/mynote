@@ -25,10 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mynotemainwindow.cpp
+        mynotemainwindow.cpp \
+    noteexplorer.cpp \
+    note.cpp
 
 HEADERS += \
-        mynotemainwindow.h
+        mynotemainwindow.h \
+    noteexplorer.h \
+    note.h
 
 FORMS += \
         mynotemainwindow.ui
