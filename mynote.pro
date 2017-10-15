@@ -27,12 +27,18 @@ SOURCES += \
         main.cpp \
         mynotemainwindow.cpp \
     noteexplorer.cpp \
-    note.cpp
+    note.cpp \
+    notebook.cpp
 
 HEADERS += \
         mynotemainwindow.h \
     noteexplorer.h \
-    note.h
+    note.h \
+    globals.h \
+    notebook.h
 
 FORMS += \
         mynotemainwindow.ui
+
+RESOURCES += \
+    mynote_resources.qrc

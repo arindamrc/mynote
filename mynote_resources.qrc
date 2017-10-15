@@ -1,0 +1,44 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="bold">resources/bold.png</file>
+        <file alias="broken_link">resources/broken-link.png</file>
+        <file>resources/center-align.png</file>
+        <file alias="quit">resources/close.png</file>
+        <file>resources/columns.png</file>
+        <file alias="copy">resources/copy.png</file>
+        <file alias="eraser">resources/eraser.png</file>
+        <file>resources/export.png</file>
+        <file alias="new_notebook">resources/file-1.png</file>
+        <file alias="new_note">resources/file.png</file>
+        <file alias="open_notebook">resources/folder.png</file>
+        <file alias="font">resources/font.png</file>
+        <file>resources/import.png</file>
+        <file>resources/indent.png</file>
+        <file alias="italics">resources/italic.png</file>
+        <file>resources/justify.png</file>
+        <file>resources/left-align.png</file>
+        <file alias="link">resources/link.png</file>
+        <file>resources/list-1.png</file>
+        <file>resources/list.png</file>
+        <file>resources/outdent.png</file>
+        <file>resources/paperclip.png</file>
+        <file alias="paragraph">resources/paragraph.png</file>
+        <file alias="paste">resources/paste.png</file>
+        <file alias="find">resources/preview.png</file>
+        <file alias="print">resources/print.png</file>
+        <file alias="redo">resources/redo.png</file>
+        <file>resources/right-align.png</file>
+        <file alias="save_notebook_as">resources/save-1.png</file>
+        <file alias="save_note">resources/save.png</file>
+        <file alias="cut">resources/scissors.png</file>
+        <file>resources/strikethrough.png</file>
+        <file>resources/subscript.png</file>
+        <file>resources/superscript.png</file>
+        <file>resources/table-1.png</file>
+        <file alias="table">resources/table.png</file>
+        <file>resources/text-height.png</file>
+        <file>resources/text-width.png</file>
+        <file alias="underline">resources/underline.png</file>
+        <file alias="undo">resources/undo.png</file>
+    </qresource>
+</RCC>

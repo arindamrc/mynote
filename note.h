@@ -2,8 +2,9 @@
 #define NOTE_H
 
 #include <QGraphicsView>
+#include <QScrollArea>
 
-class Note : public QGraphicsView
+class Note : public QGraphicsView, QScrollArea
 {
     Q_OBJECT
 

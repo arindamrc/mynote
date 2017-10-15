@@ -32,68 +32,7 @@ private:
     NoteExplorer *explorer;
 
     // The app status bar
-    QStatusBar noteStatus;
-
-    //Menus
-    QMenu *fileMenu;
-    QMenu *editMenu;
-    QMenu *insertMenu;
-    QMenu *drawMenu;
-    QMenu *formatMenu;
-    QMenu *helpMenu;
-
-    //Toolbars
-
-    //Actions - FileMenu
-    QAction *newNoteBook;
-    QAction *newNote;
-    QAction *saveNote;
-    QAction *openNoteBook;
-    QAction *closeNoteBook;
-    QAction *saveAsNoteBook; //save as or export
-    QAction *printNote;
-    QAction *exit;
-
-    //Actions - EditMenu
-    QAction *undo;
-    QAction *redo;
-    QAction *cut;
-    QAction *copy;
-    QAction *paste;
-    QAction *findAndReplace;
-    QAction *selectAll;
-
-    //Actions - InsertMenu
-    QAction *imgInsert;
-    QAction *tableInsert;
-    QAction *symbolInsert;
-    QAction *linkInsert;
-    QAction *lineInsert;
-
-    //Actions - DrawMenu
-    QAction *pen;
-    QAction *brush;
-    QAction *eraser;
-    QAction *thickness;
-    QAction *highlighterPen; //free form
-
-    //Actions - FormatMenu
-    QAction *heading;
-    QAction *subHeading;
-    QAction *paragraph;
-    QAction *bullets;
-    QAction *fonts;
-    QAction *underline;
-    QAction *bold;
-    QAction *highlight;
-    QAction *italics;
-    QAction *group;
-    QAction *unGroup;
-
-    //Actions - HelpMenu
-    QAction *usage;
-    QAction *licensing;
-    QAction *about;
+    QStatusBar *noteStatus;
 
     //Toolbars
     QToolBar *fileToolBar;
@@ -101,13 +40,69 @@ private:
     QToolBar *insertToolbar;
     QToolBar *drawToolBar;
 
-    void createActions();
-    void createMenus();
+    //setup
+    void createAppDirectory();
+    void createConnections();
     void createContextMenu();
-    void createToolBars();
+    void createLayout();
     void createStatusBar();
     void readSettings();
     void writeSettings();
+
+    //helpers and utilities
+    void closeEvent();
+
+
+private slots:
+
+    // File Menu
+    void file_newNotebook();
+    void file_newNote();
+    void file_saveNote();
+    void file_openNotebook();
+    void file_closeNotebook();
+    void file_saveNotebookAs();
+    void file_printNote();
+    void file_quit();
+
+    // Edit Menu
+    void edit_undo();
+    void edit_redo();
+    void edit_cut();
+    void edit_copy();
+    void edit_paste();
+    void edit_find();
+    void edit_selectAll();
+
+    // Insert Menu
+    void insert_image();
+    void insert_table();
+    void insert_symbol();
+    void insert_link();
+    void insert_line();
+
+    // Draw Menu
+    void draw_pen();
+    void draw_brush();
+    void draw_eraser();
+    void draw_highlighter();
+
+    // Format Menu
+    void format_paragraph();
+    void format_bullet();
+    void format_font();
+    void format_underline();
+    void format_highlight();
+    void format_italics();
+    void format_group();
+    void format_ungroup();
+
+    // Help Menu
+    void help_aboutMyNote();
+    void help_usage();
+    void help_license();
+
+
 };
 
 #endif // MYNOTEMAINWINDOW_H

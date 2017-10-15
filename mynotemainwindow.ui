@@ -23,6 +23,77 @@
      <height>27</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNew_Notebook"/>
+    <addaction name="actionNew_Note"/>
+    <addaction name="actionOpen_Notebook"/>
+    <addaction name="actionClose_Notebook"/>
+    <addaction name="actionSave_Note"/>
+    <addaction name="actionSave_Notebook_As"/>
+    <addaction name="actionPrint_Note"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Edit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="actionFind_and_replace"/>
+    <addaction name="actionSelect_All"/>
+   </widget>
+   <widget class="QMenu" name="menu_Insert">
+    <property name="title">
+     <string>&amp;Insert</string>
+    </property>
+    <addaction name="actionImage"/>
+    <addaction name="actionTable"/>
+    <addaction name="actionSymbol"/>
+    <addaction name="actionLink"/>
+    <addaction name="actionLine"/>
+   </widget>
+   <widget class="QMenu" name="menu_Draw">
+    <property name="title">
+     <string>&amp;Draw</string>
+    </property>
+    <addaction name="actionPen"/>
+    <addaction name="actionBrush"/>
+    <addaction name="actionEraser"/>
+    <addaction name="actionHighlighter"/>
+   </widget>
+   <widget class="QMenu" name="menu_Format">
+    <property name="title">
+     <string>F&amp;ormat</string>
+    </property>
+    <addaction name="actionFont"/>
+    <addaction name="actionParagraph"/>
+    <addaction name="actionBullets"/>
+    <addaction name="actionUnderline"/>
+    <addaction name="actionHighlight"/>
+    <addaction name="actionItalics"/>
+    <addaction name="actionGroup"/>
+    <addaction name="actionUngroup"/>
+   </widget>
+   <widget class="QMenu" name="menu_Help">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionUsage"/>
+    <addaction name="actionLicense"/>
+    <addaction name="actionAbout_MyNote"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menu_Edit"/>
+   <addaction name="menu_Insert"/>
+   <addaction name="menu_Draw"/>
+   <addaction name="menu_Format"/>
+   <addaction name="menu_Help"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -31,10 +102,431 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionNew_Note"/>
+   <addaction name="actionNew_Notebook"/>
+   <addaction name="actionOpen_Notebook"/>
+   <addaction name="actionSave_Note"/>
+   <addaction name="actionPrint_Note"/>
+   <addaction name="separator"/>
+   <addaction name="actionCut"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionPaste"/>
+   <addaction name="actionFind_and_replace"/>
+   <addaction name="separator"/>
+   <addaction name="actionImage"/>
+   <addaction name="actionTable"/>
+   <addaction name="separator"/>
+   <addaction name="actionPen"/>
+   <addaction name="actionEraser"/>
+   <addaction name="separator"/>
+   <addaction name="actionFont"/>
+   <addaction name="actionUnderline"/>
+   <addaction name="actionItalics"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionNew_Notebook">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/new_note</normaloff>:/icons/new_note</iconset>
+   </property>
+   <property name="text">
+    <string>New Notebook</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a new notebook&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+N</string>
+   </property>
+  </action>
+  <action name="actionNew_Note">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/new_notebook</normaloff>:/icons/new_notebook</iconset>
+   </property>
+   <property name="text">
+    <string>New Note</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create a new note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOpen_Notebook">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/open_notebook</normaloff>:/icons/open_notebook</iconset>
+   </property>
+   <property name="text">
+    <string>Open Notebook</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open an existing notebook&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionClose_Notebook">
+   <property name="text">
+    <string>Close Notebook</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close current notebook&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionSave_Note">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/save_note</normaloff>:/icons/save_note</iconset>
+   </property>
+   <property name="text">
+    <string>Save Note</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSave_Notebook_As">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/save_notebook_as</normaloff>:/icons/save_notebook_as</iconset>
+   </property>
+   <property name="text">
+    <string>Save Notebook As...</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save current notebook as...&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionPrint_Note">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/print</normaloff>:/icons/print</iconset>
+   </property>
+   <property name="text">
+    <string>Print Note</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Print current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/quit</normaloff>:/icons/quit</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/undo</normaloff>:/icons/undo</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Undo last action&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/redo</normaloff>:/icons/redo</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Redo last action&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Z</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/cut</normaloff>:/icons/cut</iconset>
+   </property>
+   <property name="text">
+    <string>Cut</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cut text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/copy</normaloff>:/icons/copy</iconset>
+   </property>
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Copy text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/paste</normaloff>:/icons/paste</iconset>
+   </property>
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Paste text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionFind_and_replace">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/find</normaloff>:/icons/find</iconset>
+   </property>
+   <property name="text">
+    <string>Find and replace</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Find and replace text in notes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionSelect_All">
+   <property name="text">
+    <string>Select all</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select all text in current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionImage">
+   <property name="text">
+    <string>Image</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Insert an image in current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionTable">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/table</normaloff>:/icons/table</iconset>
+   </property>
+   <property name="text">
+    <string>Table</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Insert a table into current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionSymbol">
+   <property name="text">
+    <string>Symbol</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Insert a symbol into current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionLink">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/link</normaloff>:/icons/link</iconset>
+   </property>
+   <property name="text">
+    <string>Link</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Insert a hyperlink into current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionLine">
+   <property name="text">
+    <string>Line</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Insert a line into current note&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionPen">
+   <property name="text">
+    <string>Pen</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw with a pen&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionBrush">
+   <property name="text">
+    <string>Brush</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Draw with a brush&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionEraser">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/eraser</normaloff>:/icons/eraser</iconset>
+   </property>
+   <property name="text">
+    <string>Eraser</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove drawn marks with an eraser&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionHighlighter">
+   <property name="text">
+    <string>Highlighter</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Highlight your notes with a free-form highlighter&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/font</normaloff>:/icons/font</iconset>
+   </property>
+   <property name="text">
+    <string>Font</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit font style of selected text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionParagraph">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/paragraph</normaloff>:/icons/paragraph</iconset>
+   </property>
+   <property name="text">
+    <string>Paragraph</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Edit paragraph style of selected text.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionBullets">
+   <property name="text">
+    <string>Bullets</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change selected text into a bullet list&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionUnderline">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/underline</normaloff>:/icons/underline</iconset>
+   </property>
+   <property name="text">
+    <string>Underline</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Underline selected text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionHighlight">
+   <property name="text">
+    <string>Highlight</string>
+   </property>
+  </action>
+  <action name="actionItalics">
+   <property name="icon">
+    <iconset resource="mynote_resources.qrc">
+     <normaloff>:/icons/italics</normaloff>:/icons/italics</iconset>
+   </property>
+   <property name="text">
+    <string>Italics</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Italicoze selected text&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionGroup">
+   <property name="text">
+    <string>Group</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Group selected note boxes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionUngroup">
+   <property name="text">
+    <string>Ungroup</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ungroup grouped note boxes&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionUsage">
+   <property name="text">
+    <string>Usage</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Software documentation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionLicense">
+   <property name="text">
+    <string>License</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Software license information&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionAbout_MyNote">
+   <property name="text">
+    <string>About MyNote</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;About MyNote, credits and further information&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="mynote_resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
