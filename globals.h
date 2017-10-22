@@ -12,7 +12,8 @@ namespace globals {
     const QString appDisplayName = "MyNote";
     const QString appVersion = "0.0.1";
     const QString orgDomain = "arclights.in";
-    const int note_defaultStretch = 4;
+    const int defaultStretch_note = 8;
+    const int defaultStretch_explorer = 1;
 
 }
 

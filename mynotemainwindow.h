@@ -25,11 +25,11 @@ private:
     // The working directory
     QDir *workingDir;
 
-    // The note in focus
-    Note *currentNote;
-
     // All open notes
     NoteExplorer *explorer;
+
+    // The note in focus
+    Note *currentNote;
 
     // The app status bar
     QStatusBar *noteStatus;

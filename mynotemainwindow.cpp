@@ -6,6 +6,7 @@
 #include "mynotemainwindow.h"
 #include "ui_mynotemainwindow.h"
 #include "globals.h"
+#include "treemodel.h"
 
 MyNoteMainWindow::MyNoteMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -78,12 +79,14 @@ void MyNoteMainWindow::createConnections(){
 }
 
 void MyNoteMainWindow::createLayout(){
-    explorer = new NoteExplorer();
-    currentNote = new Note();
+    TreeModel *treeModel = new TreeModel();
+    explorer = new NoteExplorer(treeModel);
+//    currentNote = new Note("dummy", new Notebook("dummy"));
     QSplitter *mainSplitter= new QSplitter();
     mainSplitter->addWidget(explorer);
     mainSplitter->addWidget(currentNote);
-    mainSplitter->setStretchFactor(1,globals::note_defaultStretch);
+    mainSplitter->setStretchFactor(0,globals::defaultStretch_explorer);
+    mainSplitter->setStretchFactor(1,globals::defaultStretch_note);
     setCentralWidget(mainSplitter);
     setWindowTitle(globals::appDisplayName);
 }
