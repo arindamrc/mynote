@@ -2,49 +2,61 @@
 #define NOTEBOOK_H
 
 #include <QList>
+#include <QTreeView>
+#include <QTreeWidgetItem>
 
 #include "note.h"
-#include "treeitem.h"
 
 class Note;
-class EmptyTreeItem;
 
-class Notebook : public TreeItem {
+class Notebook : public QTreeWidgetItem {
 
 private:
 
     QString name; // The notebook name
     QList<Note*> notes; // The notes in this notebook
     Note *currentNote; // The note user is working on
+    QTreeWidgetItem *p;
+
+    static bool comparator(Note* a, Note* b);
 
 public:
 
-    explicit Notebook(QString name, EmptyTreeItem* parent) : TreeItem((TreeItem*)parent) {
-        this->name = name;
-    }
-
-    explicit Notebook(EmptyTreeItem *parent) : TreeItem((TreeItem*) parent){
-    }
+    explicit Notebook(QString name, QTreeWidgetItem *emptyParent);
 
     ~Notebook();
 
-    // TreeItem methods
-    TreeItem *child(int number);
+    QString& getName();
+
+    QString text(int column) const;
+
+    QIcon icon(int column) const;
+
+    QString statusTip(int column) const;
+
+    QString toolTip(int column) const;
+
+    QTreeWidgetItem* parent() const;
+
+    QTreeWidgetItem* child(int index) const;
+
     int childCount() const;
-    QVariant data() const;
-    bool insertChildren(int position, int rows);
-    TreeItem *parent();
-    bool removeChildren(int position, int count);
-    int childNumber() const;
-    bool setData(const QVariant &value);
-    int childIndex(const TreeItem* child);
 
-    QString& getName(){
-        return name;
-    }
+    int columnCount() const;
 
-    bool insertNote(int position, Note* nt);
-    void addNote(Note* nt);
+    int indexOfChildNote(Note *child) const;
+
+    Qt::ItemFlags flags() const;
+
+    void addChildNote(Note* nt);
+
+    void addChild(QTreeWidgetItem *child);
+
+    QVariant data(int column, int role) const;
+
+    void setData(int column, int role, const QVariant &value);
+
+    bool operator<(const QTreeWidgetItem &other) const;
 };
 
 #endif // NOTEBOOK_H

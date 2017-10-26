@@ -1,99 +1,114 @@
 #include "notebook.h"
 
 #include <QStringList>
+#include <QDebug>
+
+Notebook::Notebook(QString name, QTreeWidgetItem *emptyParent) : QTreeWidgetItem(emptyParent) {
+    this->name = name;
+    this->p = emptyParent;
+}
 
 Notebook::~Notebook(){
-    delete parentItem;
+    delete p;
     qDeleteAll(notes);
 }
 
-TreeItem* Notebook::child(int number){
-    return (TreeItem*) notes.value(number);
-}
-
-int Notebook::childCount() const
-{
-    return notes.count();
-}
-
-int Notebook::childNumber() const
-{
-    if (parentItem){
-        return parentItem->childIndex((TreeItem*)this); // return the empty header data
+bool Notebook::comparator(Note *a, Note *b){
+    if (a->getName() < b->getName()){
+        return true;
     }
-
-    return 0;
-}
-
-QVariant Notebook::data() const
-{
-    return QVariant(this->name);
-}
-
-bool Notebook::insertChildren(int position, int rows)
-{
-    if (position < 0 || position > notes.size())
+    else {
         return false;
-
-    for(int i = 0; i < rows; i++){
-        Note *item = new Note(this);
-        notes.insert(position, item);
     }
-
-    return true;
 }
 
-TreeItem *Notebook::parent()
-{
-    return parentItem;
+QString& Notebook::getName(){
+    return name;
 }
 
-bool Notebook::removeChildren(int position, int count)
-{
-    if (position < 0 || position + count > notes.size())
-        return false;
-
-    for (int row = 0; row < count; ++row)
-        delete notes.takeAt(position);
-
-    return true;
+QString Notebook::text(int column) const{
+    return this->name;
 }
 
-bool Notebook::setData(const QVariant &value)
-{
+QIcon Notebook::icon(int column) const{
+    return QIcon(":/resources/notebook.png");
+}
+
+QString Notebook::statusTip(int column) const{
+    return this->name;
+}
+
+QString Notebook::toolTip(int column) const {
+    return this->name;
+}
+
+QTreeWidgetItem* Notebook::parent() const{
+    return QTreeWidgetItem::parent();
+}
+
+void Notebook::addChild(QTreeWidgetItem *child){
+    QTreeWidgetItem::addChild(child);
+    notes.append((Note*)child);
+    QTreeWidgetItem::sortChildren(0, Qt::AscendingOrder);
+    std::sort(notes.begin(), notes.end(), Notebook::comparator);
+}
+
+QTreeWidgetItem* Notebook::child(int index) const{
+    return (QTreeWidgetItem*)notes.at(index);
+}
+
+int Notebook::childCount() const {
+    return notes.size();
+}
+
+int Notebook::columnCount() const {
+    return 1;
+}
+
+int Notebook::indexOfChildNote(Note *child) const{
+    return notes.indexOf(child);
+}
+
+Qt::ItemFlags Notebook::flags() const{
+    return (Qt::ItemIsEditable | Qt::ItemNeverHasChildren);
+}
+
+void Notebook::addChildNote(Note *nt){
+    QTreeWidgetItem::addChild((QTreeWidgetItem*)nt);
+    notes.append(nt);
+    QTreeWidgetItem::sortChildren(0, Qt::AscendingOrder);
+    std::sort(notes.begin(), notes.end(), Notebook::comparator);
+}
+
+QVariant Notebook::data(int column, int role) const{
+    switch (role) {
+    case Qt::DisplayRole:
+        return text(column);
+        break;
+    case Qt::DecorationRole:
+        return icon(column);
+        break;
+    case Qt::StatusTipRole:
+        return statusTip(column);
+        break;
+    case Qt::ToolTipRole:
+        return toolTip(column);
+        break;
+    default:
+        return QTreeWidgetItem::data(column, role);
+    }
+}
+
+void Notebook::setData(int column, int role, const QVariant &value){
+    QTreeWidgetItem::setData(column, role, value);
     this->name = value.toString();
-    return true;
 }
 
-int Notebook::childIndex(const TreeItem *child){
-    Note* c = (Note*)child;
-    return notes.indexOf(c);
-}
-
-bool Notebook::insertNote(int position, Note *nt){
-    if (position < 0 || position > notes.size())
+bool Notebook::operator <(const QTreeWidgetItem &other) const{
+    Notebook& o = (Notebook&) other;
+    if(this->name < o.getName()){
+        return true;
+    } else {
         return false;
-
-    QModelIndex index = selectionModel()->currentIndex();
-    QAbstractItemModel *m = model();
-
-    if (m->columnCount(index) == 0) {
-        if (!m->insertColumn(0, index))
-            return false;
     }
-
-    if (!m->insertRow(position, index))
-        return false;
-
-    QModelIndex child = m->index(position, 0, index);
-    m->setData(child, QVariant(nb->getName()), Qt::EditRole);
-
-    selectionModel()->setCurrentIndex(child, QItemSelectionModel::ClearAndSelect);
-
-    notebooks.insert(position, nb);
-    return true;
-}
-
-void Notebook::addNote(Note *nt){
-
 }

@@ -1,56 +1,93 @@
 #include "note.h"
+#include <QDebug>
+
+Note::Note(QString name, Notebook *p) : QTreeWidgetItem((QTreeWidgetItem*)p) {
+    this->name = name;
+    this->p = p;
+    this->p->addChild(this);
+}
 
 Note::~Note(){
-    delete parentItem;
+    qDeleteAll(noteBoxes);
+    delete p;
+    delete boxInFocus;
 }
 
-
-TreeItem* Note::child(int number){
-    return 0; //  A note doesn't have a child
+QString& Note::getName(){
+    return this->name;
 }
 
-int Note::childCount() const
-{
-    return 0; //  A note doesn't have a child
+QString Note::text(int column) const{
+    return this->name;
 }
 
-int Note::childNumber() const
-{
-    if (parentItem){
-        Notebook* p = static_cast<Notebook*>(parentItem);
-        return p->childIndex(this);
-    }
+QIcon Note::icon(int column) const{
+    return QIcon(":/resources/note.png");
+}
 
+QString Note::statusTip(int column) const{
+    return this->name;
+}
+
+QString Note::toolTip(int column) const {
+    return this->name;
+}
+
+void Note::addChild(QTreeWidgetItem *child){
+    // do nothing
+    return;
+}
+
+QTreeWidgetItem* Note::parent() const{
+    return QTreeWidgetItem::parent();
+}
+
+QTreeWidgetItem* Note::child(int index) const{
+    return 0; // no child
+}
+
+Qt::ItemFlags Note::flags() const{
+    return (Qt::ItemIsEditable | Qt::ItemNeverHasChildren);
+}
+
+int Note::childCount() const {
     return 0;
 }
 
-QVariant Note::data() const
-{
-    return QVariant(this->name);
+int Note::columnCount() const {
+    return 1;
 }
 
-bool Note::insertChildren(int position, int rows)
-{
-    // Note has no children
-    return false;
+QVariant Note::data(int column, int role) const{
+    switch (role) {
+    case Qt::DisplayRole:
+        return text(column);
+        break;
+    case Qt::DecorationRole:
+        return icon(column);
+        break;
+    case Qt::StatusTipRole:
+        return statusTip(column);
+        break;
+    case Qt::ToolTipRole:
+        return toolTip(column);
+        break;
+    default:
+        return QTreeWidgetItem::data(column, role);
+    }
 }
 
-TreeItem *Note::parent()
-{
-    return parentItem;
-}
-
-bool Note::removeChildren(int position, int count)
-{
-    return false;
-}
-
-bool Note::setData(const QVariant &value)
-{
+void Note::setData(int column, int role, const QVariant &value){
+    QTreeWidgetItem::setData(column, role, value);
     this->name = value.toString();
-    return true;
 }
 
-int Note::childIndex(const TreeItem *child){
-    return -1; // No children
+bool Note::operator <(const QTreeWidgetItem &other) const{
+    Note& o = (Note&) other;
+    if(this->name < o.getName()){
+        return true;
+    } else {
+        return false;
+    }
 }
+

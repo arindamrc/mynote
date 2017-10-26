@@ -1,12 +1,12 @@
 #ifndef NOTEEXPLORER_H
 #define NOTEEXPLORER_H
 
-#include <QTreeView>
+#include <QTreeWidget>
 
 #include "notebook.h"
 #include "treemodel.h"
 
-class NoteExplorer : public QTreeView
+class NoteExplorer : public QTreeWidget
 {
     Q_OBJECT
 

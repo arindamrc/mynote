@@ -2,14 +2,15 @@
 #include <QSettings>
 #include <QSplitter>
 #include <QTextEdit>
+#include <QDebug>
 
 #include "mynotemainwindow.h"
 #include "ui_mynotemainwindow.h"
 #include "globals.h"
 #include "treemodel.h"
 
-MyNoteMainWindow::MyNoteMainWindow(QWidget *parent) :
-    QMainWindow(parent),
+MyNoteMainWindow::MyNoteMainWindow(QWidget *parent_widget) :
+    QMainWindow(parent_widget),
     ui(new Ui::MyNoteMainWindow)
 {
     ui->setupUi(this);
@@ -18,6 +19,7 @@ MyNoteMainWindow::MyNoteMainWindow(QWidget *parent) :
     createAppDirectory();
     createConnections();
     createLayout();
+    loadNotebooks();
 }
 
 MyNoteMainWindow::~MyNoteMainWindow()
@@ -79,16 +81,19 @@ void MyNoteMainWindow::createConnections(){
 }
 
 void MyNoteMainWindow::createLayout(){
-    TreeModel *treeModel = new TreeModel();
-    explorer = new NoteExplorer(treeModel);
-//    currentNote = new Note("dummy", new Notebook("dummy"));
-    QSplitter *mainSplitter= new QSplitter();
-    mainSplitter->addWidget(explorer);
-    mainSplitter->addWidget(currentNote);
-    mainSplitter->setStretchFactor(0,globals::defaultStretch_explorer);
-    mainSplitter->setStretchFactor(1,globals::defaultStretch_note);
-    setCentralWidget(mainSplitter);
     setWindowTitle(globals::appDisplayName);
+}
+
+void MyNoteMainWindow::loadNotebooks(){
+    QTreeWidgetItem* treeRoot = this->ui->noteExplorerWidget->invisibleRootItem();
+
+    Notebook* nb2 = new Notebook("nb2", treeRoot);
+    Notebook* nb1 = new Notebook("nb1", treeRoot);
+    Note* n2 = new Note("n2", nb1);
+    Note* n1 = new Note("n1", nb1);
+    Note* n4 = new Note("n4", nb2);
+    Note* n3 = new Note("n3", nb2);
+    ui->noteExplorerWidget->sortByColumn(0, Qt::AscendingOrder);
 }
 
 

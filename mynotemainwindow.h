@@ -16,7 +16,7 @@ class MyNoteMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MyNoteMainWindow(QWidget *parent = 0);
+    explicit MyNoteMainWindow(QWidget *parent_widget = 0);
     ~MyNoteMainWindow();
 
 private:
@@ -48,6 +48,7 @@ private:
     void createStatusBar();
     void readSettings();
     void writeSettings();
+    void loadNotebooks();
 
     //helpers and utilities
     void closeEvent();

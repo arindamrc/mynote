@@ -26,23 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mynotemainwindow.cpp \
-    noteexplorer.cpp \
     note.cpp \
     notebook.cpp \
-    notebox.cpp \
-    emptytreeitem.cpp \
-    treemodel.cpp
+    notebox.cpp
 
 HEADERS += \
         mynotemainwindow.h \
-    noteexplorer.h \
     note.h \
     globals.h \
     notebook.h \
-    notebox.h \
-    treeitem.h \
-    emptytreeitem.h \
-    treemodel.h
+    notebox.h
 
 FORMS += \
         mynotemainwindow.ui

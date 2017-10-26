@@ -17,7 +17,7 @@ private:
     int theta; // The rotation of the notebox
     int h, w;  // The height and width of the box
 
-    Note *parent; // The note this box belongs to
+    Note *p; // The note this box belongs to
 
 public:
     explicit Notebox();

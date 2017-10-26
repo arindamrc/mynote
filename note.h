@@ -6,13 +6,12 @@
 #include <QTextEdit>
 
 #include "notebox.h"
-#include "treeitem.h"
 #include "notebook.h"
 
 class Notebook;
 class Notebox;
 
-class Note : public QGraphicsView, public TreeItem
+class Note : public QGraphicsView, public QTreeWidgetItem
 {
     Q_OBJECT
 
@@ -20,26 +19,41 @@ private:
     QString name; // The note name
     QList<Notebox*> noteBoxes; // The noteboxes in this note
     Notebox *boxInFocus; // The box currently in focus. A box is created wherever the user clicks on the note.
+    Notebook* p;
 
 public:
-    explicit Note(QString name, Notebook *parent) : TreeItem((TreeItem*)parent){
-        this->name = name;
-    }
-
-    explicit Note(Notebook *parent) : TreeItem((TreeItem*) parent) { }
+    Note(QString name, Notebook* p);
 
     ~Note();
 
-    // TreeItem methods
-    TreeItem *child(int number);
+    QString& getName();
+
+    QString text(int column) const;
+
+    QIcon icon(int column) const;
+
+    QString statusTip(int column) const;
+
+    QString toolTip(int column) const;
+
+    QTreeWidgetItem* parent() const;
+
+    QTreeWidgetItem* child(int index) const;
+
+    void addChild(QTreeWidgetItem *child);
+
+    Qt::ItemFlags flags() const;
+
     int childCount() const;
-    QVariant data() const;
-    bool insertChildren(int position, int rows);
-    TreeItem *parent();
-    bool removeChildren(int position, int count);
-    int childNumber() const;
-    bool setData(const QVariant &value);
-    int childIndex(const TreeItem* child);
+
+    int columnCount() const;
+
+    QVariant data(int column, int role) const;
+
+    void setData(int column, int role, const QVariant &value);
+
+    bool operator<(const QTreeWidgetItem &other) const;
+
 };
 
 #endif // NOTE_H

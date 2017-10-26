@@ -1,7 +1,7 @@
 #include "noteexplorer.h"
 
 NoteExplorer::NoteExplorer(TreeModel *qaiModel){
-    setModel(qaiModel);
+//    setModel(qaiModel);
 }
 
 NoteExplorer::~NoteExplorer(){
