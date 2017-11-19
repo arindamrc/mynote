@@ -78,6 +78,7 @@ void MyNoteMainWindow::createConnections(){
     connect(ui->actionUndo, SIGNAL(triggered(bool)), this, SLOT(edit_undo()));
     connect(ui->actionUngroup, SIGNAL(triggered(bool)), this, SLOT(format_ungroup()));
     connect(ui->actionUsage, SIGNAL(triggered(bool)), this, SLOT(help_usage()));
+    connect(ui->noteTabWidget, SIGNAL(currentChanged(int)), this, SLOT(tab_changed()));
 }
 
 void MyNoteMainWindow::createLayout(){
@@ -85,15 +86,30 @@ void MyNoteMainWindow::createLayout(){
 }
 
 void MyNoteMainWindow::loadNotebooks(){
-    QTreeWidgetItem* treeRoot = this->ui->noteExplorerWidget->invisibleRootItem();
+    qDebug() << "loading notebooks";
+    ui->noteExplorerWidget->setHeaderLabels(QStringList() << tr("Notebooks"));
+    ui->noteExplorerWidget->sortByColumn(0, ui->noteExplorerWidget->header()->sortIndicatorOrder());
+    QTreeWidgetItem* treeRoot = ui->noteExplorerWidget->invisibleRootItem();
+    NoteBook* nb2 = new NoteBook("nb2", treeRoot);
+    NoteBook* nb1 = new NoteBook("nb1", treeRoot);
 
-    Notebook* nb2 = new Notebook("nb2", treeRoot);
-    Notebook* nb1 = new Notebook("nb1", treeRoot);
+    qDebug() << "made notebooks";
+
     Note* n2 = new Note("n2", nb1);
     Note* n1 = new Note("n1", nb1);
     Note* n4 = new Note("n4", nb2);
     Note* n3 = new Note("n3", nb2);
-    ui->noteExplorerWidget->sortByColumn(0, Qt::AscendingOrder);
+
+
+    n2->openNote();
+    n4->openNote();
+    openNotes.append(n2);
+    openNotes.append(n4);
+
+    ui->noteTabWidget->addTab((QWidget*)n2->getNoteView(), n2->getName());
+    ui->noteTabWidget->addTab((QWidget*)n4->getNoteView(), n4->getName());
+
+    openNotes[0]->getNoteView()->show(); // default view
 }
 
 
@@ -104,6 +120,12 @@ void MyNoteMainWindow::closeEvent(){
 }
 
 // Slots
+
+void MyNoteMainWindow::tab_changed(){
+    qDebug() << "Selected Tab:" << ui->noteTabWidget->currentIndex();
+    int selectedTab = ui->noteTabWidget->currentIndex();
+    openNotes[selectedTab]->getNoteView()->show();
+}
 
 void MyNoteMainWindow::file_newNotebook(){
     qDebug() << "New notebook";

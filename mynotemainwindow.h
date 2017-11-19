@@ -26,7 +26,7 @@ private:
     QDir *workingDir;
 
     // All open notes
-    NoteExplorer *explorer;
+    QList<Note*> openNotes;
 
     // The note in focus
     Note *currentNote;
@@ -103,7 +103,8 @@ private slots:
     void help_usage();
     void help_license();
 
-
+    // Note Tab
+    void tab_changed();
 };
 
 #endif // MYNOTEMAINWINDOW_H

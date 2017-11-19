@@ -11,15 +11,15 @@ class NoteExplorer : public QTreeWidget
     Q_OBJECT
 
 private:
-    QList<Notebook*> notebooks; // All the open notebooks
-    Notebook* currentNotebook; // The notebook user is working on
+    QList<NoteBook*> notebooks; // All the open notebooks
+    NoteBook* currentNotebook; // The notebook user is working on
 
 public:
     explicit NoteExplorer(TreeModel *treeModel);
     ~NoteExplorer();
 
-    bool insertNotebook(int position, Notebook* nb);
-    void addNotebok(Notebook* nb);
+    bool insertNotebook(int position, NoteBook* nb);
+    void addNotebok(NoteBook* nb);
 };
 
 #endif // NOTEEXPLORER_H

@@ -9,7 +9,7 @@
 
 class Note;
 
-class Notebook : public QTreeWidgetItem {
+class NoteBook : public QTreeWidgetItem {
 
 private:
 
@@ -22,38 +22,26 @@ private:
 
 public:
 
-    explicit Notebook(QString name, QTreeWidgetItem *emptyParent);
+    explicit NoteBook(QString name, QTreeWidgetItem *emptyParent);
 
-    ~Notebook();
+    ~NoteBook();
 
     QString& getName();
 
+    // QTreeWidgetItem's overridden methods
     QString text(int column) const;
-
     QIcon icon(int column) const;
-
     QString statusTip(int column) const;
-
     QString toolTip(int column) const;
-
     QTreeWidgetItem* parent() const;
-
     QTreeWidgetItem* child(int index) const;
-
     int childCount() const;
-
     int columnCount() const;
-
     int indexOfChildNote(Note *child) const;
-
     Qt::ItemFlags flags() const;
-
     void addChildNote(Note* nt);
-
     void addChild(QTreeWidgetItem *child);
-
     QVariant data(int column, int role) const;
-
     void setData(int column, int role, const QVariant &value);
 
     bool operator<(const QTreeWidgetItem &other) const;

@@ -36,8 +36,14 @@
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
        </property>
-       <attribute name="headerVisible">
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="headerHidden">
         <bool>false</bool>
+       </property>
+       <attribute name="headerVisible">
+        <bool>true</bool>
        </attribute>
        <column>
         <property name="text">
@@ -52,16 +58,9 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <widget class="QWidget" name="tab">
-        <attribute name="title">
-         <string>Tab 1</string>
-        </attribute>
-       </widget>
-       <widget class="QWidget" name="tab_2">
-        <attribute name="title">
-         <string>Tab 2</string>
-        </attribute>
-       </widget>
+       <property name="currentIndex">
+        <number>-1</number>
+       </property>
       </widget>
      </widget>
     </item>

@@ -14,6 +14,10 @@ namespace globals {
     const QString orgDomain = "arclights.in";
     const int defaultStretch_note = 8;
     const int defaultStretch_explorer = 1;
+    const double boxHeight = 10.0;
+    const double boxWidth = 20.0;
+    const double boxOrientation = 0.0; // in radians
+
 
 }
 

@@ -3,17 +3,17 @@
 #include <QStringList>
 #include <QDebug>
 
-Notebook::Notebook(QString name, QTreeWidgetItem *emptyParent) : QTreeWidgetItem(emptyParent) {
+NoteBook::NoteBook(QString name, QTreeWidgetItem *emptyParent) : QTreeWidgetItem(emptyParent) {
     this->name = name;
     this->p = emptyParent;
 }
 
-Notebook::~Notebook(){
+NoteBook::~NoteBook(){
     delete p;
     qDeleteAll(notes);
 }
 
-bool Notebook::comparator(Note *a, Note *b){
+bool NoteBook::comparator(Note *a, Note *b){
     if (a->getName() < b->getName()){
         return true;
     }
@@ -22,65 +22,65 @@ bool Notebook::comparator(Note *a, Note *b){
     }
 }
 
-QString& Notebook::getName(){
+QString& NoteBook::getName(){
     return name;
 }
 
-QString Notebook::text(int column) const{
+QString NoteBook::text(int column) const{
     return this->name;
 }
 
-QIcon Notebook::icon(int column) const{
+QIcon NoteBook::icon(int column) const{
     return QIcon(":/resources/notebook.png");
 }
 
-QString Notebook::statusTip(int column) const{
+QString NoteBook::statusTip(int column) const{
     return this->name;
 }
 
-QString Notebook::toolTip(int column) const {
+QString NoteBook::toolTip(int column) const {
     return this->name;
 }
 
-QTreeWidgetItem* Notebook::parent() const{
+QTreeWidgetItem* NoteBook::parent() const{
     return QTreeWidgetItem::parent();
 }
 
-void Notebook::addChild(QTreeWidgetItem *child){
+void NoteBook::addChild(QTreeWidgetItem *child){
     QTreeWidgetItem::addChild(child);
     notes.append((Note*)child);
     QTreeWidgetItem::sortChildren(0, Qt::AscendingOrder);
-    std::sort(notes.begin(), notes.end(), Notebook::comparator);
+    std::sort(notes.begin(), notes.end(), NoteBook::comparator);
 }
 
-QTreeWidgetItem* Notebook::child(int index) const{
+QTreeWidgetItem* NoteBook::child(int index) const{
     return (QTreeWidgetItem*)notes.at(index);
 }
 
-int Notebook::childCount() const {
+int NoteBook::childCount() const {
     return notes.size();
 }
 
-int Notebook::columnCount() const {
+int NoteBook::columnCount() const {
     return 1;
 }
 
-int Notebook::indexOfChildNote(Note *child) const{
+int NoteBook::indexOfChildNote(Note *child) const{
     return notes.indexOf(child);
 }
 
-Qt::ItemFlags Notebook::flags() const{
+Qt::ItemFlags NoteBook::flags() const{
     return (Qt::ItemIsEditable | Qt::ItemNeverHasChildren);
 }
 
-void Notebook::addChildNote(Note *nt){
+void NoteBook::addChildNote(Note *nt){
     QTreeWidgetItem::addChild((QTreeWidgetItem*)nt);
     notes.append(nt);
     QTreeWidgetItem::sortChildren(0, Qt::AscendingOrder);
-    std::sort(notes.begin(), notes.end(), Notebook::comparator);
+    std::sort(notes.begin(), notes.end(), NoteBook::comparator);
 }
 
-QVariant Notebook::data(int column, int role) const{
+QVariant NoteBook::data(int column, int role) const{
     switch (role) {
     case Qt::DisplayRole:
         return text(column);
@@ -99,13 +99,13 @@ QVariant Notebook::data(int column, int role) const{
     }
 }
 
-void Notebook::setData(int column, int role, const QVariant &value){
+void NoteBook::setData(int column, int role, const QVariant &value){
     QTreeWidgetItem::setData(column, role, value);
     this->name = value.toString();
 }
 
-bool Notebook::operator <(const QTreeWidgetItem &other) const{
-    Notebook& o = (Notebook&) other;
+bool NoteBook::operator <(const QTreeWidgetItem &other) const{
+    NoteBook& o = (NoteBook&) other;
     if(this->name < o.getName()){
         return true;
     } else {
